@@ -20,7 +20,7 @@ python3 -m pip install -r requirements.txt
 
 ### Launch cassandra container
 ```
-docker start cassandra || docker run --name cassandra -d cassandra
+docker start cassandra || docker run --name node01 -d cassandra
 ```
 
 ### Copy data to container
