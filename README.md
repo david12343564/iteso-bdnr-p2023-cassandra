@@ -1,4 +1,4 @@
-# iteso-o2022-bda-cassandra
+# iteso-p2023-bdnr-cassandra
 
 A place to share cassandra app code
 
