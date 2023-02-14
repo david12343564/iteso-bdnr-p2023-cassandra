@@ -48,6 +48,12 @@ SELECT_USER_ACCOUNTS = """
     WHERE username = ?
 """
 
+SELECT_POSITIONS_BY_ACOUNT = """
+    SELECT account, symbol, quantity
+    FROM positions_by_account
+    WHERE account = ?
+"""
+
 def create_keyspace(session, keyspace, replication_factor):
     log.info(f"Creating keyspace: {keyspace} with replication factor {replication_factor}")
     session.execute(CREATE_KEYSPACE.format(keyspace, replication_factor))
@@ -67,3 +73,11 @@ def get_user_accounts(session, username):
     for row in rows:
         print(f"=== Account: {row.account_number} ===")
         print(f"- Cash Balance: {row.cash_balance}")
+
+def get_positions_by_account(session, account_number):
+    log.info(f"Retrieving positions from {account_number}")
+    stmt = session.prepare(SELECT_POSITIONS_BY_ACOUNT)
+    rows = session.execute(stmt, [account_number])
+    print(f"=== Position of {account_number}")
+    for row in rows:
+        print(f"- {row.symbol}: {row.quantity}")

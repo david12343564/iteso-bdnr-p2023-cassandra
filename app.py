@@ -15,7 +15,7 @@ handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(name)s: %(
 log.addHandler(handler)
 
 # Read env vars releated to Cassandra App
-CLUSTER_IPS = os.getenv('CASSANDRA_CLUSTER_IPS', '172.18.0.2')
+CLUSTER_IPS = os.getenv('CASSANDRA_CLUSTER_IPS', 'localhost')
 KEYSPACE = os.getenv('CASSANDRA_KEYSPACE', 'investments')
 REPLICATION_FACTOR = os.getenv('CASSANDRA_REPLICATION_FACTOR', '1')
 
@@ -72,7 +72,8 @@ def main():
         if option == 1:
             model.get_user_accounts(session, username)
         if option == 2:
-            pass
+            account_number = input('Account number: ')
+            model.get_positions_by_account(session, account_number)
         if option == 3:
             print_trade_history_menu()
             tv_option = int(input('Enter your trade view choice: '))
