@@ -2,6 +2,7 @@
 import logging
 import os
 import random
+import options
 
 from cassandra.cluster import Cluster
 
