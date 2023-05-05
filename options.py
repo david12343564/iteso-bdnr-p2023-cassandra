@@ -46,6 +46,22 @@ def print_transits():
         else:
             print(transits[i] + ",", end=" ")
 
+def print_yes_no():
+    options = ['TRUE', 'FALSE']
+    for i in range(len(options)):
+        print(f"{i+1}- {options[i]}", end="")
+        if i < len(options) - 1:
+            print(",", end=" ")
+    print()
+
+def print_wait():
+    options = ['MORE THAN', 'LESS THAN']
+    for i in range(len(options)):
+        print(f"{i+1}- {options[i]}", end="")
+        if i < len(options) - 1:
+            print(",", end=" ")
+    print()
+
 
 
 def print_all():
@@ -69,6 +85,9 @@ def print_all():
 def main():
     print('\n')
     print_all()
+
+    print_yes_no()
+    print_wait()
     return 0
 
 if __name__ == '__main__':
