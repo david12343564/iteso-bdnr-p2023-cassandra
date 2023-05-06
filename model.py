@@ -13,8 +13,8 @@ CREATE_KEYSPACE = """
 CREATE_PRINCIPAL_TABLE = '''
 CREATE TABLE IF NOT EXISTS airport_wait_time (
   airline text,
-  from text,
-  to text,
+  de text,
+  hacia text,
   day int,
   month int,
   year int,
