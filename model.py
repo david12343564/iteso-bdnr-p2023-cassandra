@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS airport_wait_time (
   transit text,
   connection text,
   wait int,
-  PRIMARY KEY ((airline, from, to, year, month, day), age, gender, reason, stay, transit, connection)
+  PRIMARY KEY ((airline, de, hacia, year, month, day), age, gender, reason, stay, transit, connection)
 ) WITH CLUSTERING ORDER BY (age DESC, gender DESC, reason DESC, stay DESC, transit DESC, connection DESC);
 
 '''
