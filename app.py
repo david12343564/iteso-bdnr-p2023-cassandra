@@ -4,6 +4,7 @@ import os
 import random
 import options
 
+
 from cassandra.cluster import Cluster
 
 import model
@@ -23,6 +24,7 @@ REPLICATION_FACTOR = os.getenv('CASSANDRA_REPLICATION_FACTOR', '1')
 
 
 def print_menu():
+    print('\n')
     mm_options = {
         1: "Show all flights",
         2: "Show flights by airline",
@@ -39,9 +41,9 @@ def print_menu():
         13: "Show flights by percentage for a specific day",
         14: "Show flights by percentage for wait time less than or equal to",
         15: "Show flights by percentage for wait time greater than or equal to",
-        16: "Show flights by percentage for a specific airport and day",
-        17: "Show flights by percentage for a specific airport and month",
-        18: "Show flights by percentage for a specific airport and year",
+        16: "Show flights by percentage for a specific airport (Origin) and day",
+        17: "Show flights by percentage for a specific airport (Origin) and month",
+        18: "Show flights by percentage for a specific airport (Origin) and year",
         19: "Show flights by percentage for connecting flights",
         20: "Show flights by percentage for non-connecting flights",
         21: "Show flights by percentage for a specific airline and date",
@@ -68,7 +70,11 @@ def main():
     model.create_schema(session)
 
     
+
+    
+    
     while(True):
+        print_menu()
         print("\nCopy and paste when there are given options\n")
         option = int(input('Enter your choice: '))
         if option == 1:
@@ -114,10 +120,10 @@ def main():
             model.select_by_from_to_wait(session,origin, destination, wait_time)
             
         elif option == 8:
-            options.print_stays
-            stay_option = input('Enter stay option')
-            options.print_yes_no
-            connection = input('Enter connection option')
+            options.print_stays()
+            stay_option = input('Enter stay option:')
+            options.print_yes_no()
+            connection = input('Enter connection option: ')
             model.select_by_stay_connection(session, stay_option,connection)
 
         elif option == 9:
@@ -134,7 +140,7 @@ def main():
             model.select_by_transit_wait(session, transit_option, wait_time)
 
         elif option == 11:
-            options.print_airports
+            options.print_airports()
             origin = input('Enter origin airport: ')
             destination = input('Enter destination airport: ')
             month = int(input('Enter month: '))
@@ -143,6 +149,9 @@ def main():
         elif option == 12:
             date = input('Enter date (dd-mm-yyyy): ')
             day, month, year = date.split("-")
+            day = int(day)
+            month = int(month)
+            year = int(year)
             model.select_by_percentaje_date(session,day,month,year)
 
         elif option == 13:
@@ -159,19 +168,19 @@ def main():
 
         elif option == 16:
             options.print_airports()
-            airport_code = input('Enter airport name: ')
+            airport_code = input('Enter airport name (Origin): ')
             day = int(input('Enter day of the month: '))
             model.select_by_percentaje_to_day(session,day,airport_code)
 
         elif option == 17:
             options.print_airports()
-            airport_code = input('Enter airport name: ')
+            airport_code = input('Enter airport name (Origin): ')
             month = int(input('Enter month mm: '))
             model.select_by_percentaje_to_month(session, month,airport_code)
         
         elif option == 18:
             options.print_airports()
-            airport_code = input('Enter airport name: ')
+            airport_code = input('Enter airport name (Origin): ')
             year = int(input('Enter year yyyy: '))
             model.select_by_percentaje_to_year(session,year,airport_code)
         
@@ -186,6 +195,9 @@ def main():
             airline = input('Enter Airline: ')
             date = input('Enter date (dd-mm-yyyy): ')
             day, month, year = date.split("-")
+            day = int(day)
+            month = int(month)
+            year = int(year)
             model.select_by_percentaje_airline_date(session,airline,day,month,year)
         
         elif option == 22:
